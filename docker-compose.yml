@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  #service 1: mysqlデータベースの定義
+  db:
+      build:
+        context: ./db
+        args:
+          DEVELOPER_UID: $DEVELOPER_UID
+      container_name: iibc_db_$BRANCH_NAME
+      ports:
+        - "3307:3306"
+      environment:
+        TZ: 'Asia/Tokyo'
+      # volumes:
+        # - ./db/lib/:/var/lib/mysql
+        # - ./db/conf/my.cnf:/etc/my.cnf
+      restart: always
+
+  # service 2: アプリケーションの定義
+  app:
+      build: 
+        context: ./
+        args:
+          DEVELOPER_UID: $DEVELOPER_UID
+      container_name: iibc_app_$BRANCH_NAME
+      environment:
+        TZ: 'Asia/Tokyo'
+        SPRING_PROFILES_ACTIVE: $SPRING_PROFILES_ACTIVE
+        MYSQL_HOST: iibc_db_$BRANCH_NAME
+      expose:
+        - "8080"
+      ports:
+        - "8081:8080"
+      depends_on:
+        - db
+      restart: always
