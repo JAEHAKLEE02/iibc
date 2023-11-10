@@ -9,12 +9,11 @@ services:
           DEVELOPER_UID: $DEVELOPER_UID
       container_name: iibc_db_$BRANCH_NAME
       ports:
-        - "3307:3306"
+        - "3306:3306"
       environment:
         TZ: 'Asia/Tokyo'
-      # volumes:
-        # - ./db/lib/:/var/lib/mysql
-        # - ./db/conf/my.cnf:/etc/my.cnf
+      volumes:
+        - ./:/app
       restart: always
 
   # service 2: アプリケーションの定義
