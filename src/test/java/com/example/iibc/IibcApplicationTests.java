@@ -1,10 +1,8 @@
 package com.example.iibc;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.Test;
 
-@SpringBootTest
-class IibcApplicationTests {
+public class IibcApplicationTests {
 
 	@Test
 	void contextLoads() {

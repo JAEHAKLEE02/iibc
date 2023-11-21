@@ -1,0 +1,25 @@
+server:
+    port: 8080
+
+spring:
+    datasource:
+        url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/appdb
+        username: appuser
+        password: pass
+        driver-class-name: com.mysql.cj.jdbc.Driver
+    thymeleaf:
+        cache: false
+
+okta:
+  oauth2:
+    # Replace with the domain of your Auth0 tenant.
+    issuer: https://dev-50zxpfb0so2tbi0q.us.auth0.com/
+    # Replace with the API Identifier for your Auth0 API.
+    audience: http://localhost:8080/login
+    client-id: d6IF4078h6CqL6PwZkg0iFju2Om13TmW
+    client-secret: teqzyqOPjHNbnG7xTYSJ5cWbk3HgMCJJNxQEbli_1L8jmHSGsIvQnZqCsqtMgGcs
+    scopes: 
+      - openid
+      - profile
+      - email
+      - offline_access
