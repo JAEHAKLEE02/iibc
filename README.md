@@ -15,8 +15,14 @@
 1. `docker-compose build` 実行
 1. `docker-compose up -d` 実行
 
-## 確認方法
-1. [http://localhost:8081/](http://localhost:8081/)
+## 動作確認方法
+1. [http://localhost:8081/](http://localhost:8081/)接続
+2. GoogleでログインorGoogleで続ける選択
+3. Login Success画面が出力
+4. 右上のアイコンのProfile押下（Jsonデータ表示）
+5. 右上のアイコンのLogout押下
+6. Logout確認画面表示→Logout押下
+7. １のログイン画面が再表示
 
 ## 終了手順
 1. `docker-compose down -v` 実行
