@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE logback>
+<configuration>
+
+  <!-- コンソール出力設定 -->
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <target>System.out</target>
+    <encoder>
+      <charset>UTF-8</charset>
+      <pattern>%d{yyyy/MM/dd HH:mm:ss} %-5level [%thread] %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <property name="LOG_FILE" value="iibc" />
+  <property name="LOG_DIR" value="logs" />
+  <!-- アプリケーションログのファイル出力用設定 -->
+  <appender name="APPLICATION_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <!--ファイル名設定 -->
+    <file>${LOG_DIR}/${LOG_FILE}.log</file>
+    <!-- 日毎にログファイルを切り替える -->
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>${LOG_DIR}/${LOG_FILE}-%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+      <!-- 保持しておくログアーカイブファイルの最大数 -->
+      <maxHistory>30</maxHistory>
+    </rollingPolicy>
+    <!--ログ出力フォーマット設定 -->
+    <encoder>
+      <charset>UTF-8</charset>
+      <pattern>%d{yyyy/MM/dd HH:mm:ss} %-5level [%thread] %logger{36} [%file : %line] %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <!-- ルートDEBUG, INFO, WARN, ERROR レベルのログを出力 -->
+  <root level="DEBUG">
+    <!-- 全てのロガーのメッセージを定義した STDOUT アペンダーに出力 -->
+    <appender-ref ref="STDOUT"/>
+  </root>
+
+  <root level="INFO">
+      <appender-ref ref="APPLICATION_LOG" />
+  </root>
+</configuration>
